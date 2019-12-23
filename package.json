@@ -1,0 +1,19 @@
+{
+  "name": "ac-host-manager",
+  "version": "1.0.1",
+  "description": "Test access host speed",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/markrookie/ac-host-manager.git"
+  },
+  "author": "markrookie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/markrookie/ac-host-manager/issues"
+  },
+  "homepage": "https://github.com/markrookie/ac-host-manager#readme"
+}
