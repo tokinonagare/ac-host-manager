@@ -10,6 +10,19 @@
 
 export default class ACSpeedTestModel {
 
+    async testFastest(hosts) {
+        try {
+            const requests = hosts.map(host => this._request(host));
+            const fastestResult = await Promise.race(requests);
+            if (fastestResult) {
+                return fastestResult;
+            }
+            return undefined;
+        } catch (error) {
+            throw error;
+        }
+    }
+
     /**
      * 传入一组hosts即可 测试它们的访问速度返回数据如下
      * [{
@@ -20,7 +33,7 @@ export default class ACSpeedTestModel {
      * @param hosts
      * @returns {Promise<any[]>}
      */
-    async test(hosts) {
+    async testAll(hosts) {
         const requests = hosts.map((host) => this._request(host));
         return await Promise.all(requests);
     }
