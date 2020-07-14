@@ -12,6 +12,12 @@ export default class ACSpeedTestModel {
 
     async testFastest(hosts) {
         try {
+            if (!(hosts instanceof Array)) {
+                return undefined;
+            }
+            if (hosts.length === 0) {
+                return undefined;
+            }
             const requests = hosts.map(host => this._request(host));
             const fastestResult = await Promise.race(requests);
             if (fastestResult) {
