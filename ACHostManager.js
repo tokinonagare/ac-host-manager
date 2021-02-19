@@ -23,8 +23,8 @@ export default class ACHostManager {
     async getFastest() {
         try {
             // 先直接请求最快Host，如果有直接返回
-            const fastestResult = this.speedTestModel.testFastest(this._hosts);
-            if (fastestResult) {
+            const fastestResult = await this.speedTestModel.testFastest(this._hosts);
+            if (fastestResult && fastestResult.available) {
                 return fastestResult;
             }
             // 如果直接请求最快Host失败，再测速所有Host，返回最快的
