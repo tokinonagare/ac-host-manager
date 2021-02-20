@@ -76,6 +76,8 @@ export default class ACSpeedTestModel {
                     resolve({host, available: false, message: 'server_down'});
                 } else if (this.status > 300) {
                     resolve({host, available: false, message: 'request_error'});
+                } else {
+                    resolve({host, available: false, message: 'ac.speed.test.model.unknown.error'});
                 }
             };
         });
