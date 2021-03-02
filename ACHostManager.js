@@ -29,6 +29,9 @@ export default class ACHostManager {
             }
             // 如果直接请求最快Host失败，把所有Host按访问速度排序
             const sortedResults = await this.sortByAccessSpeed();
+            if (sortedResults.length === 0) {
+                return undefined;
+            }
             // 返回第一个即是最快的
             return sortedResults[0];
         } catch (error) {
@@ -41,7 +44,7 @@ export default class ACHostManager {
         const results = await this.speedTestModel.testAll(this._hosts);
         const availableResults = results.filter(result => result.available);
         if (availableResults.length === 0) {
-            return undefined;
+            return [];
         }
         return availableResults.sort((result1, result2) => {
             // 按延迟从低到高排序
