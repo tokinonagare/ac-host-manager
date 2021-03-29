@@ -24,7 +24,8 @@ export default class ACHostManager {
         try {
             // 先直接请求最快Host，如果有直接返回
             const fastestResult = await this.speedTestModel.testFastest(this._hosts);
-            if (fastestResult && fastestResult.available) {
+            const { available, delay } = fastestResult;
+            if (fastestResult && available && delay < 1000) {
                 return fastestResult;
             }
             // 如果直接请求最快Host失败，把所有Host按访问速度排序

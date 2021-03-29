@@ -64,18 +64,22 @@ export default class ACSpeedTestModel {
             http.onload = function() {
                 if (200 <= this.status && this.status < 300) {
                     const endTime = new Date().getTime();
-                    const delayTime = endTime - startTime;
+                    const frontEndDelay = endTime - startTime;
                     const result = JSON.parse(this.response);
-                    const { server_load } = result;
+                    const { server_load, backend_delay: backEndDelay } = result;
+                    // 前端访问代理机器的delay + 代理机到服务器的delay就是用户到服务器的延迟
+                    const totalDelay = frontEndDelay + backEndDelay;
                     if (server_load === 'normal') {
-                        resolve({host, available: true, message: 'this_host_is_ok', delay: delayTime});
+                        resolve({host, available: true, message: 'this_host_is_ok', delay: totalDelay});
                     } else {
-                        resolve({host, available: false, message: 'this_host_is_forbidden', delay: delayTime});
+                        resolve({host, available: false, message: 'this_host_is_forbidden', delay: totalDelay});
                     }
-                } else if (this.status >= 500) {
-                    resolve({host, available: false, message: 'server_down'});
-                } else if (this.status > 300) {
+                } else if (300 <= this.status && this.status < 400) {
                     resolve({host, available: false, message: 'request_error'});
+                } else if (400 <= this.status && this.status < 500) {
+                    resolve({host, available: false, message: `ACSpeedTestModel request client error - ${this.status}`});
+                } else if (500 <= this.status) {
+                    resolve({host, available: false, message: 'server_down'});
                 } else {
                     resolve({host, available: false, message: 'ac.speed.test.model.unknown.error'});
                 }
