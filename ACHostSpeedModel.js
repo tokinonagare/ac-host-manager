@@ -10,7 +10,7 @@
 
 import ACSpeedTestModel from './ACSpeedTestModel';
 
-export default class ACHostManager {
+export default class ACHostSpeedModel {
 
     constructor(hosts) {
         // 复制hosts

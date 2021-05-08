@@ -8,4 +8,4 @@
  * @emails a9mm51@gmail.com
  */
 
-export default from './ACHostManager';
+export ACHostSpeedModel from './ACHostSpeedModel';

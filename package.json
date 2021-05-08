@@ -1,6 +1,6 @@
 {
   "name": "ac-host-manager",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Test access host speed",
   "main": "index.js",
   "scripts": {
