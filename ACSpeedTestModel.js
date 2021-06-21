@@ -52,7 +52,6 @@ export default class ACSpeedTestModel {
             http.timeout = 3000;
             http.setRequestHeader('Accept', 'application/json');
             http.setRequestHeader('Content-Type', 'application/json');
-            http.setRequestHeader('Access-Control-Allow-Origin', '*');
             const startTime = new Date().getTime();
             http.send();
             http.ontimeout = function() {
